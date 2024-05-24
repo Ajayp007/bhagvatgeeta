@@ -5,5 +5,4 @@ ThemeData lightTheme = ThemeData(
 );
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  appBarTheme: AppBarTheme();
 );

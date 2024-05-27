@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:bhagvatgeeta/screen/home/provider/home_provider.dart';
 import 'package:bhagvatgeeta/utils/theme_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushNamed(context, 'detail',arguments: providerRH!.slokList[index]);
                 },
                 subtitle: Text("${providerRH!.slokList[index].title}",style: TextStyle(color: Colors.white),),
-                title: Text("${providerRH!.slokList[index].name}",style: const TextStyle(fontSize: 20,color: Colors.white),),
+                title: Text("${providerRH!.slokList[index].shloka}",style: const TextStyle(fontSize: 20,color: Colors.white),overflow: TextOverflow.ellipsis,),
                 leading: Text("${providerRH!.slokList[index].id}",style: const TextStyle(fontSize: 20,color: Colors.white),),
               );
             },

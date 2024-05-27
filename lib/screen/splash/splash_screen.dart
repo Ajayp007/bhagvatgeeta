@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return SafeArea(
       child: Scaffold(
         body: Image.network(
-          "https://rukminim2.flixcart.com/image/850/1000/jyyqc280/regionalbooks/y/6/3/srimad-bhagavad-gita-as-it-is-hindi-2018-new-edition-hardcover-original-imaf79gzwhhey4zz.jpeg?q=90&crop=false",
+          "https://i.pinimg.com/originals/54/3b/39/543b39bba687fe2dc534e338e76d76d1.jpg",
           fit: BoxFit.cover,height: MediaQuery.sizeOf(context).height,
           width: MediaQuery.sizeOf(context).width,
         ),

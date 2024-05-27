@@ -31,9 +31,14 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                "${m1.url}",
-                fit: BoxFit.cover,
+              Container(
+                height: 500,
+                width: MediaQuery.sizeOf(context).width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                      image: NetworkImage("${m1.url}"), fit: BoxFit.cover),
+                ),
               ),
               const SizedBox(
                 height: 20,

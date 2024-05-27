@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:bhagvatgeeta/screen/home/provider/home_provider.dart';
 import 'package:bhagvatgeeta/utils/theme_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   HomeProvider? providerRH;
   HomeProvider? providerWH;
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeProvider>().getJson();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +58,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
           ),
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
             child: Container(),
           ),
           ListView.builder(
             itemCount: providerWH!.slokList.length,
             itemBuilder: (context, index) {
               return ListTile(
-                subtitle: Text("${providerRH!.slokList[index].title}"),
-                title: Text("${providerRH!.slokList[index].name}"),
-                leading: Text("${providerRH!.slokList[index].id}"),
+                onTap: () {
+                  Navigator.pushNamed(context, 'detail',arguments: providerRH!.slokList[index]);
+                },
+                subtitle: Text("${providerRH!.slokList[index].title}",style: TextStyle(color: Colors.white),),
+                title: Text("${providerRH!.slokList[index].name}",style: const TextStyle(fontSize: 20,color: Colors.white),),
+                leading: Text("${providerRH!.slokList[index].id}",style: const TextStyle(fontSize: 20,color: Colors.white),),
               );
             },
           ),

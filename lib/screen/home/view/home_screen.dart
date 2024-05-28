@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: [
+
           Image.asset(
             "assets/images/krishna.jpg",
             fit: BoxFit.cover,
@@ -68,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushNamed(context, 'detail',arguments: providerRH!.slokList[index]);
                 },
                 subtitle: Text("${providerRH!.slokList[index].title}",style: TextStyle(color: Colors.white),),
-                title: Text("${providerRH!.slokList[index].shloka}",style: const TextStyle(fontSize: 20,color: Colors.white),overflow: TextOverflow.ellipsis,),
+                title: Text("${providerRH!.slokList[index].chapter}",style: const TextStyle(fontSize: 20,color: Colors.white),overflow: TextOverflow.ellipsis,),
                 leading: Text("${providerRH!.slokList[index].id}",style: const TextStyle(fontSize: 20,color: Colors.white),),
               );
             },

@@ -25,30 +25,37 @@ class _DetailScreenState extends State<DetailScreen> {
         title: Text("${m1.title}"),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 500,
-                width: MediaQuery.sizeOf(context).width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      image: NetworkImage("${m1.url}"), fit: BoxFit.cover),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                "${m1.shloka}",
-              ),
-            ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 10),
+          Text(
+            "${m1.chapter}",
+            style: const TextStyle(fontSize: 22),
           ),
-        ),
+          Container(
+            height: 300,
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
+            width: MediaQuery.sizeOf(context).width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                  image: NetworkImage("${m1.url}"), fit: BoxFit.cover),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: ListView.builder(
+              itemCount: m1.shloka!.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text("${m1.english![index]}"),
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }

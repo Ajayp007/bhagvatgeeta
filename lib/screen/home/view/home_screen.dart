@@ -35,16 +35,57 @@ class _HomeScreenState extends State<HomeScreen> {
     providerWH = context.watch<HomeProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("|| ભગવદ ગીતા ||"),
+        title: providerWH!.language=="Sanskrit"?const Text("|| भगवद् गीता||"):const Text("|| Bhagvad Gita ||"),
         centerTitle: true,
         actions: [
-          Switch(
-            value: providerW!.themeMode,
-            onChanged: (value) {
-              setThemeData(value);
-              providerR!.setTheme();
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  child: RadioListTile(
+                    value: "All",
+                    groupValue: providerWH!.language,
+                    onChanged: (value) {
+                      providerWH!.changeLanguage(value!);
+                    },
+                    title: const Text("All"),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: RadioListTile(
+                    value: "Sanskrit",
+                    groupValue: providerWH!.language,
+                    onChanged: (value) {
+                      providerWH!.changeLanguage(value!);
+                      Navigator.pop(context);
+                    },
+                    title: const Text("Sanskrit"),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: RadioListTile(
+                    value: "English",
+                    groupValue: providerWH!.language,
+                    onChanged: (value) {
+                      providerWH!.changeLanguage(value!);
+                      Navigator.pop(context);
+                    },
+                    title: const Text("English"),
+                  ),
+                ),
+                PopupMenuItem(
+                  child:Switch(
+                    value: providerW!.themeMode,
+                    onChanged: (value) {
+                      setThemeData(value);
+                      providerR!.setTheme();
+                    },
+                  ),
+                ),
+              ];
             },
           ),
+
         ],
       ),
       body: Stack(
@@ -61,6 +102,19 @@ class _HomeScreenState extends State<HomeScreen> {
             filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
             child: Container(),
           ),
+          providerWH!.language=="Sanskrit"?ListView.builder(
+            itemCount: providerWH!.slokList.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, 'detail',arguments: providerRH!.slokList[index]);
+                },
+                subtitle: Text("${providerRH!.slokList[index].title}",style: const TextStyle(color: Colors.white),),
+                title: Text("${providerRH!.slokList[index].chapter}",style: const TextStyle(fontSize: 20,color: Colors.white),overflow: TextOverflow.ellipsis,),
+                leading: Text("${providerRH!.slokList[index].id}",style: const TextStyle(fontSize: 20,color: Colors.white),),
+              );
+            },
+          ) :
           ListView.builder(
             itemCount: providerWH!.slokList.length,
             itemBuilder: (context, index) {
@@ -68,8 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   Navigator.pushNamed(context, 'detail',arguments: providerRH!.slokList[index]);
                 },
-                subtitle: Text("${providerRH!.slokList[index].title}",style: TextStyle(color: Colors.white),),
-                title: Text("${providerRH!.slokList[index].chapter}",style: const TextStyle(fontSize: 20,color: Colors.white),overflow: TextOverflow.ellipsis,),
+                subtitle: Text("${providerRH!.slokList[index].eChapter}",style: const TextStyle(color: Colors.white),),
+                title: Text("${providerRH!.slokList[index].tEnglish}",style: const TextStyle(fontSize: 20,color: Colors.white),overflow: TextOverflow.ellipsis,),
                 leading: Text("${providerRH!.slokList[index].id}",style: const TextStyle(fontSize: 20,color: Colors.white),),
               );
             },

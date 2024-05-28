@@ -5,9 +5,19 @@ import 'package:flutter/material.dart';
 class HomeProvider with ChangeNotifier {
   List<HomeModel> slokList = [];
 
+  String? language;
+
+
   Future<void> getJson() async {
     JsonHelper helper = JsonHelper();
     slokList = await helper.slokJson();
     notifyListeners();
   }
+
+  void changeLanguage(String change)
+  {
+    language = change;
+    notifyListeners();
+  }
+
 }

@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   HomeProvider? providerRH;
   HomeProvider? providerWH;
+
   @override
   void initState() {
     super.initState();
@@ -35,7 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
     providerWH = context.watch<HomeProvider>();
     return Scaffold(
       appBar: AppBar(
-        title: providerWH!.language=="Sanskrit"?const Text("|| भगवद् गीता||"):const Text("|| Bhagvad Gita ||"),
+        title: providerWH!.language == "Sanskrit"
+            ? const Text("|| भगवद् गीता||")
+            : const Text("|| Bhagvad Gita ||"),
         centerTitle: true,
         actions: [
           PopupMenuButton(
@@ -74,60 +77,85 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 PopupMenuItem(
-                  child:Switch(
+                  child: Switch(
                     value: providerW!.themeMode,
                     onChanged: (value) {
                       setThemeData(value);
                       providerR!.setTheme();
+                      Navigator.pop(context);
                     },
                   ),
                 ),
               ];
             },
           ),
-
         ],
       ),
       body: Stack(
         children: [
-
           Image.asset(
             "assets/images/krishna.jpg",
             fit: BoxFit.cover,
             height: MediaQuery.sizeOf(context).height,
             width: MediaQuery.sizeOf(context).width,
-
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
             child: Container(),
           ),
-          providerWH!.language=="Sanskrit"?ListView.builder(
-            itemCount: providerWH!.slokList.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                onTap: () {
-                  Navigator.pushNamed(context, 'detail',arguments: providerRH!.slokList[index]);
-                },
-                subtitle: Text("${providerRH!.slokList[index].title}",style: const TextStyle(color: Colors.white),),
-                title: Text("${providerRH!.slokList[index].chapter}",style: const TextStyle(fontSize: 20,color: Colors.white),overflow: TextOverflow.ellipsis,),
-                leading: Text("${providerRH!.slokList[index].id}",style: const TextStyle(fontSize: 20,color: Colors.white),),
-              );
-            },
-          ) :
-          ListView.builder(
-            itemCount: providerWH!.slokList.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                onTap: () {
-                  Navigator.pushNamed(context, 'detail',arguments: providerRH!.slokList[index]);
-                },
-                subtitle: Text("${providerRH!.slokList[index].eChapter}",style: const TextStyle(color: Colors.white),),
-                title: Text("${providerRH!.slokList[index].tEnglish}",style: const TextStyle(fontSize: 20,color: Colors.white),overflow: TextOverflow.ellipsis,),
-                leading: Text("${providerRH!.slokList[index].id}",style: const TextStyle(fontSize: 20,color: Colors.white),),
-              );
-            },
-          ),
+          providerWH!.language == "Sanskrit"
+              ? ListView.builder(
+                  itemCount: providerWH!.slokList.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'detail',
+                            arguments: providerRH!.slokList[index]);
+                      },
+                      subtitle: Text(
+                        "${providerRH!.slokList[index].title}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      title: Text(
+                        "${providerRH!.slokList[index].chapter}",
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      leading: Text(
+                        "${providerRH!.slokList[index].id}",
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    );
+                  },
+                )
+              : ListView.builder(
+                  itemCount: providerWH!.slokList.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'detail',
+                            arguments: providerRH!.slokList[index]);
+                      },
+                      subtitle: Text(
+                        "${providerRH!.slokList[index].eChapter}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      title: Text(
+                        "${providerRH!.slokList[index].tEnglish}",
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      leading: Text(
+                        "${providerRH!.slokList[index].id}",
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    );
+                  },
+                ),
         ],
       ),
     );

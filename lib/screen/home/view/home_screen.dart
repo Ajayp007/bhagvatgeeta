@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     groupValue: providerWH!.language,
                     onChanged: (value) {
                       providerWH!.changeLanguage(value!);
+                      Navigator.pop(context);
                     },
                     title: const Text("All"),
                   ),

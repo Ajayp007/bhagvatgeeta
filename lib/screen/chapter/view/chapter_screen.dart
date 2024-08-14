@@ -1,8 +1,8 @@
 import 'package:bhagvatgeeta/screen/home/model/home_model.dart';
-import 'package:bhagvatgeeta/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/shared_pref.dart';
 import '../../home/provider/home_provider.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -95,8 +95,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     itemBuilder: (context, index) {
                       return ListTile(
                         onTap: () {
-                          SharedHelper.helper.setSlok(m1.shloka![index]);
-                          providerR!.setSlok();
+                         // SharedHelper.helper.setSlok(m1.shloka![index]);
+                          providerR!.setSlok(m1.shloka![index]);
                         },
                         title: Text("${m1.shloka![index]}"),
                       );
@@ -131,8 +131,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     itemBuilder: (context, index) {
                       return ListTile(
                         onTap: () {
-                          SharedHelper.helper.setSlok(m1.english![index]);
-                          providerR!.setSlok();
+                           //SharedHelper.helper.setSlok(m1.english![index]);
+                           providerR!.setSlok(m1.english![index]);
                         },
                         title: Text("${m1.english![index]}"),
                       );

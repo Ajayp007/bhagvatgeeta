@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 PopupMenuItem(
                   child: Switch(
-                    value: providerW!.themeMode,
+                    value: providerW!.themeMode!,
                     onChanged: (value) {
                       SharedHelper.helper.setThemeData(value);
                       providerR!.setTheme();

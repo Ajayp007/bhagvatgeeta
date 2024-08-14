@@ -16,7 +16,7 @@ class _LikeScreenState extends State<LikeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeProvider>().setSlok();
+    context.read<HomeProvider>().getSlok();
   }
 
   @override
@@ -26,10 +26,10 @@ class _LikeScreenState extends State<LikeScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: ListView.builder(
-        itemCount: providerW!.likeSlokList!.length,
+        itemCount: providerW!.likeSlokList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(providerR!.likeSlokList![index]),
+            title: Text(providerR!.likeSlokList[index]),
             trailing: IconButton(
               onPressed: () {
                 providerW!.deleteLikeSlok(index);

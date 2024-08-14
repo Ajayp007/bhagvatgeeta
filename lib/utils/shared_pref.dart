@@ -10,23 +10,22 @@ class SharedHelper {
     await shr.setBool('true', themeData);
   }
 
-  Future<bool> getThemeData() async {
+  Future<bool?> getThemeData() async {
     bool? data;
-
     SharedPreferences shr = await SharedPreferences.getInstance();
     data = shr.getBool('true');
-    return data!;
+    return data;
   }
 
-  Future<void> setSlok(String sloks) async {
+  Future<void> setSlok(List<String> sloks) async {
     SharedPreferences shr = await SharedPreferences.getInstance();
-    await shr.setString('slok', sloks);
+    await shr.setStringList('slok', sloks);
   }
 
-  Future<String> getSlok() async {
-    String? sloks;
+Future<List<String>> getSlok() async {
+    List<String>? sloks;
     SharedPreferences shr = await SharedPreferences.getInstance();
-    sloks = shr.getString('slok')!;
+    sloks = shr.getStringList('slok')??[];
     return sloks;
   }
 

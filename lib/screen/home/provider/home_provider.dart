@@ -6,9 +6,8 @@ import '../../../utils/shared_pref.dart';
 
 class HomeProvider with ChangeNotifier {
   List<HomeModel> slokList = [];
-  String likeSlok = "";
   String? language;
-  List<String>? likeSlokList = [];
+  List<String> likeSlokList = [];
 
   Future<void> getJson() async {
     JsonHelper helper = JsonHelper();
@@ -21,20 +20,30 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setSlok() async {
-    if (await SharedHelper.helper.getSlok() != null) {
-      likeSlok = await SharedHelper.helper.getSlok();
-      likeSlokList!.add(likeSlok);
+  Future<void> setSlok(String likeSlok) async {
+    List<String> l1 =  await SharedHelper.helper.getSlok();
+    if (l1.isNotEmpty) {
+      l1.add(likeSlok);
+      SharedHelper.helper.setSlok(l1);
     } else {
-      likeSlok = "";
-      likeSlokList!.add(likeSlok);
+      SharedHelper.helper.setSlok([likeSlok]);
+    }
+
+    getSlok();
+    notifyListeners();
+  }
+
+  Future<void> getSlok() async {
+    List<String> data = await SharedHelper.helper.getSlok();
+    if (data.isNotEmpty) {
+      likeSlokList = data;
     }
     notifyListeners();
   }
 
   void deleteLikeSlok(int index) {
-    likeSlokList!.removeAt(index);
+    likeSlokList.removeAt(index);
+    SharedHelper.helper.setSlok(likeSlokList);
     notifyListeners();
   }
-
 }

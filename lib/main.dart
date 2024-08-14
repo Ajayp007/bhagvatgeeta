@@ -16,6 +16,7 @@ void main() {
       child: Consumer<ThemeProvider>(
         builder: (context, value, child) {
           value.setTheme();
+          context.read<HomeProvider>().setSlok();
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: lightTheme,

@@ -1,4 +1,5 @@
 import 'package:bhagvatgeeta/screen/home/model/home_model.dart';
+import 'package:bhagvatgeeta/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,9 @@ class _DetailScreenState extends State<DetailScreen> {
     HomeModel m1 = ModalRoute.of(context)!.settings.arguments as HomeModel;
     return Scaffold(
       appBar: AppBar(
-        title: providerW!.language=="Sanskrit"?Text("${m1.title}"):Text("${m1.tEnglish}"),
+        title: providerW!.language == "Sanskrit"
+            ? Text("${m1.title}")
+            : Text("${m1.tEnglish}"),
         centerTitle: true,
         actions: [
           PopupMenuButton(
@@ -91,6 +94,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     itemCount: m1.shloka!.length,
                     itemBuilder: (context, index) {
                       return ListTile(
+                        onTap: () {
+                          SharedHelper.helper.setSlok(m1.shloka![index]);
+                          providerR!.setSlok();
+                        },
                         title: Text("${m1.shloka![index]}"),
                       );
                     },
@@ -123,6 +130,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     itemCount: m1.english!.length,
                     itemBuilder: (context, index) {
                       return ListTile(
+                        onTap: () {
+                          SharedHelper.helper.setSlok(m1.english![index]);
+                          providerR!.setSlok();
+                        },
                         title: Text("${m1.english![index]}"),
                       );
                     },

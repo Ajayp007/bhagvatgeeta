@@ -77,10 +77,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 PopupMenuItem(
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'like');
+                    },
+                    leading: const Icon(Icons.bookmark_add_outlined),
+                    title: const Text("Bookmark"),
+                  ),
+                ),
+                PopupMenuItem(
                   child: Switch(
                     value: providerW!.themeMode,
                     onChanged: (value) {
-                      setThemeData(value);
+                      SharedHelper.helper.setThemeData(value);
                       providerR!.setTheme();
                       Navigator.pop(context);
                     },

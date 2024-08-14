@@ -4,8 +4,15 @@ import 'package:flutter/material.dart';
 class ThemeProvider with ChangeNotifier {
   bool themeMode = true;
 
+
   void setTheme() async {
-    themeMode = await getThemeData();
+    if (SharedHelper.helper.getThemeData != null) {
+      themeMode = await SharedHelper.helper.getThemeData();
+    } else {
+      themeMode = true;
+    }
+
     notifyListeners();
   }
+
 }
